@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
   s.version          = '1.0.0'
 
   s.source           = { 
-    :git => 'https://github.com/ksmandersen/AFRaptureXMLRequestOperation.git', 
+    :git => 'https://github.com/jansanz/AFRaptureXMLRequestOperation.git', 
     :tag => s.version.to_s 
   }
 
