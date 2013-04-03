@@ -9,6 +9,6 @@ Pod::Spec.new do |s|
   }
 
   s.source_files     = '*.{h,m}'
-  s.dependency       'AFNetworking', '~> 1.2.0'
+  s.dependency       'AFNetworking', '~> 1.1.0'
   s.dependency       'RaptureXML', '~> 1.0.0'
 end
