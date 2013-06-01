@@ -25,6 +25,7 @@
 //
 
 #import "AFRaptureXMLRequestOperation.h"
+#import "RXMLElement.h"
 
 static dispatch_queue_t rapture_xml_request_operation_processing_queue() {
     static dispatch_queue_t af_rapture_xml_request_operation_processing_queue;

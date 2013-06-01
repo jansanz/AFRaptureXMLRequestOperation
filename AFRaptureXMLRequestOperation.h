@@ -26,7 +26,8 @@
 
 #import <Foundation/Foundation.h>
 #import "AFHTTPRequestOperation.h"
-#import "RXMLElement.h"
+
+@class RXMLElement;
 
 #import <Availability.h>
 
