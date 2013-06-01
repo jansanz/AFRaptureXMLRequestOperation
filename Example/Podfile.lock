@@ -1,0 +1,20 @@
+PODS:
+  - AFNetworking (1.2.1)
+  - AFRaptureXMLRequestOperation (1.0.1):
+    - AFNetworking (~> 1.2.1)
+    - RaptureXML (~> 1.0.1)
+  - RaptureXML (1.0.1)
+
+DEPENDENCIES:
+  - AFRaptureXMLRequestOperation (from `../AFRaptureXMLRequestOperation.podspec`)
+
+EXTERNAL SOURCES:
+  AFRaptureXMLRequestOperation:
+    :path: ../AFRaptureXMLRequestOperation.podspec
+
+SPEC CHECKSUMS:
+  AFNetworking: a44069e3c9c89867544f6639482f155c7e5f9b41
+  AFRaptureXMLRequestOperation: c9b24e1ee71b1a68e625420039c2224e4cd2097a
+  RaptureXML: ef017fda62eb95c60300108366d1f0cd0c28cbd4
+
+COCOAPODS: 0.20.2
