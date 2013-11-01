@@ -37,6 +37,16 @@ static dispatch_queue_t rapture_xml_request_operation_processing_queue() {
     return af_rapture_xml_request_operation_processing_queue;
 }
 
+static dispatch_group_t rapture_xml_request_operation_completion_group() {
+    static dispatch_group_t af_rapture_xml_request_operation_completion_group;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        af_rapture_xml_request_operation_completion_group = dispatch_group_create();
+    });
+    
+    return af_rapture_xml_request_operation_completion_group;
+}
+
 @interface AFRaptureXMLRequestOperation ()
 
 @property (readwrite, nonatomic, strong) RXMLElement *responseXMLElement;
@@ -93,7 +103,7 @@ static dispatch_queue_t rapture_xml_request_operation_processing_queue() {
 }
 
 + (BOOL)canProcessRequest:(NSURLRequest *)request {
-    return [[[request URL] pathExtension] isEqualToString:@"xml"] || [super canProcessRequest:request];
+    return [[[request URL] pathExtension] isEqualToString:@"xml"];
 }
 
 - (void)setCompletionBlockWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
@@ -102,26 +112,39 @@ static dispatch_queue_t rapture_xml_request_operation_processing_queue() {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-retain-cycles"
     self.completionBlock = ^ {
-        if ([self isCancelled]) {
-            return;
+        if (self.completionGroup) {
+            dispatch_group_enter(self.completionGroup);
         }
         
         dispatch_async(rapture_xml_request_operation_processing_queue(), ^(void) {
-            RXMLElement *XMLElement = self.responseXMLElement;
             
             if (self.error) {
                 if (failure) {
-                    dispatch_async(self.failureCallbackQueue ? self.failureCallbackQueue : dispatch_get_main_queue(), ^{
+                    dispatch_group_async(self.completionGroup ?: rapture_xml_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
                         failure(self, self.error);
                     });
                 }
             } else {
-                if (success) {
-                    dispatch_async(self.successCallbackQueue ? self.successCallbackQueue : dispatch_get_main_queue(), ^{
-                        success(self, XMLElement);
-                    });
-                } 
+                RXMLElement *XMLElement = self.responseXMLElement;
+                if (self.error) {
+                    if (failure) {
+                        dispatch_group_async(self.completionGroup ?: rapture_xml_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
+                            failure(self, self.error);
+                        });
+                    }
+                } else {
+                    if (success) {
+                        dispatch_group_async(self.completionGroup ?: rapture_xml_request_operation_completion_group(), self.completionQueue ?: dispatch_get_main_queue(), ^{
+                            success(self, XMLElement);
+                        });
+                    }
+                }
             }
+            
+            if (self.completionGroup) {
+                dispatch_group_leave(self.completionGroup);
+            }
+            
         });
     };
 #pragma clang diagnostic pop
