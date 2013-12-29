@@ -1,7 +1,26 @@
 PODS:
-  - AFNetworking (1.2.1)
-  - AFRaptureXMLRequestOperation (1.0.1):
-    - AFNetworking (~> 1.2.1)
+  - AFNetworking (2.0.2):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.0.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.0.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.0.2)
+  - AFNetworking/Security (2.0.2)
+  - AFNetworking/Serialization (2.0.2)
+  - AFNetworking/UIKit (2.0.2):
+    - AFNetworking/NSURLConnection
+  - AFRaptureXMLRequestOperation (1.0.2):
+    - AFNetworking (~> 2.0.2)
     - RaptureXML (~> 1.0.1)
   - RaptureXML (1.0.1)
 
@@ -13,8 +32,8 @@ EXTERNAL SOURCES:
     :path: ../AFRaptureXMLRequestOperation.podspec
 
 SPEC CHECKSUMS:
-  AFNetworking: a44069e3c9c89867544f6639482f155c7e5f9b41
-  AFRaptureXMLRequestOperation: c9b24e1ee71b1a68e625420039c2224e4cd2097a
+  AFNetworking: 22de50ae71ab1c4859773f61068d6fcd1d8f9a4d
+  AFRaptureXMLRequestOperation: 1ba07ab4bf56cb915c09fbf6ec23873951e6038e
   RaptureXML: ef017fda62eb95c60300108366d1f0cd0c28cbd4
 
-COCOAPODS: 0.20.2
+COCOAPODS: 0.19.1

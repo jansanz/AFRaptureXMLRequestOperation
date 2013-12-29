@@ -6,9 +6,9 @@ Pod::Spec.new do |s|
   s.author           = { "Jan Sanchez" => "jan.sanchez@outlook.com" }
   s.homepage         = 'https://github.com/jansanz/AFRaptureXMLRequestOperation'
   s.source           = { :git => 'https://github.com/jansanz/AFRaptureXMLRequestOperation.git', :tag => '1.0.2' }
-  s.platform         = :ios, '5.0'
+  s.platform         = :ios, '6.0'
   s.source_files     = 'AFRaptureXMLRequestOperation/*.{h,m}'
   s.requires_arc     = true
-  s.dependency       'AFNetworking', '~> 1.2.1'
+  s.dependency       'AFNetworking', '~> 2.0.2'
   s.dependency       'RaptureXML', '~> 1.0.1'
 end
